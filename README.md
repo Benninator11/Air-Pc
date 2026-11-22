@@ -2,7 +2,7 @@
 
 **Pi Air PC Control** ist eine lokale Desktop-App für den Raspberry Pi 5. Sie verbindet eine Electron-Oberfläche mit einem lokalen Python-/Flask-Backend und OpenRouter, damit ein KI-Modell den Desktop-Kontext auswerten und – nach Bestätigung – lokale Aktionen ausführen kann.
 
-> **Aktueller Stand:** Version **1.0.8**. Die Version wurde auf einem Raspberry Pi 5 mit Raspberry Pi OS 64-bit getestet; der Projektinhaber hat bestätigt, dass die App jetzt funktioniert.
+> **Aktueller Stand:** Version **1.0.8**. Die App wurde vom Projektinhaber auf seinem Raspberry Pi 5 mit Raspberry Pi OS 64-bit installiert und erfolgreich getestet.
 
 ## Funktionen
 
@@ -23,7 +23,7 @@
 - Node.js und npm zum Erstellen aus dem Quellcode
 - Internetverbindung für OpenRouter sowie die Paketinstallation
 
-## Installation aus dem Quellcode auf dem Pi
+## Installation aus dem GitHub-Repository
 
 Repository herunterladen:
 
@@ -35,11 +35,11 @@ cd Air-Pc
 Quellcode bauen und installieren:
 
 ```bash
-chmod +x build-on-pi.sh install.sh
+chmod +x build-on-pi.sh
 ./build-on-pi.sh
 ```
 
-Das Build-Skript installiert die npm-Abhängigkeiten, erstellt das ARM64-Electron-Paket und übergibt es an `install.sh`. Das Installationsskript installiert die Python-/Desktop-Abhängigkeiten, richtet die App unter `~/.local/opt/pi-air-pc-control` ein und erstellt den Desktop-Starter.
+Das Build-Skript entpackt das Quellcode-Archiv, installiert die npm-Abhängigkeiten, erstellt das Linux-ARM64-Electron-Paket und übergibt es an `install.sh`. Das Installationsskript installiert die Python-/Desktop-Abhängigkeiten, richtet die App unter `~/.local/opt/pi-air-pc-control` ein und erstellt den Desktop-Starter.
 
 Anschließend lässt sich **Pi Air PC Control** über das Desktop-Symbol oder das Anwendungsmenü öffnen.
 
@@ -82,18 +82,13 @@ Die Desktop-Aufnahme hängt von der aktiven grafischen Sitzung und deren Berecht
 ```text
 Air-Pc/
 ├── backend/                 # Flask-Backend für OpenRouter, Desktop und Aktionen
-├── source/
-│   ├── assets/              # App-Icon
-│   ├── backend/             # Backend-Quellkopie
-│   └── src/
-│       ├── main/             # Electron Main/Preload
-│       └── renderer/         # HTML, CSS und Chat-Oberfläche
+├── source-code-v1.0.8.tar.gz # Vollständiger Quellcode samt Electron-Assets
 ├── build-on-pi.sh            # ARM64-Build und Installation
 ├── install.sh                # Systemabhängigkeiten + Desktop-Starter
 └── launch.sh                 # Startet die installierte App mit dem venv-Python
 ```
 
-Das große vorkompilierte Electron-Laufzeitprogramm wird nicht im Git-Quellbaum abgelegt: Die ARM64-Hauptdatei ist größer als GitHubs Größenlimit von 100 MiB pro Datei. `build-on-pi.sh` erzeugt diese Datei lokal aus dem enthaltenen Quellcode.
+Das vorkompilierte Electron-Laufzeitprogramm wird nicht im Git-Quellbaum abgelegt: Die ARM64-Hauptdatei ist größer als GitHubs Größenlimit von 100 MiB pro Datei. `build-on-pi.sh` erzeugt diese Datei lokal aus dem enthaltenen Quellcode.
 
 ## Versionshinweise
 
@@ -104,7 +99,7 @@ Das große vorkompilierte Electron-Laufzeitprogramm wird nicht im Git-Quellbaum 
 - Desktop-Starter prüft vor dem Start die Python-Umgebung.
 - Einstellungen und lokal gespeicherter OpenRouter-Key bleiben bei Updates erhalten.
 
-Weitere Änderungen sind in den Dateien `CHANGELOG_1.0.*.txt` dokumentiert.
+Weitere Änderungen sind in den Dateien `CHANGELOG_1.0.*.txt` im Quellcode-Archiv dokumentiert.
 
 ## Lizenz
 
